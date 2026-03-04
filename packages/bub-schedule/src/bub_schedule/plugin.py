@@ -24,7 +24,7 @@ class ScheduleImpl:
         return {"scheduler": self.scheduler}
 
     @hookimpl
-    def provide_channels(self, on_receive: MessageHandler) -> list[Channel]:
+    def provide_channels(self, message_handler: MessageHandler) -> list[Channel]:
         from bub_schedule.channel import ScheduleChannel
 
         return [ScheduleChannel(self.scheduler)]
