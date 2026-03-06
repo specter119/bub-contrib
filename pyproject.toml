@@ -8,6 +8,7 @@ dependencies = [
     "bub",
     "bub-codex",
     "bub-discord",
+    "bub-schedule",
     "bub-tg-feed",
 ]
 
@@ -19,3 +20,4 @@ bub = { git = "https://github.com/bubbuild/bub.git", rev = "frost/bub-framework"
 bub-tg-feed = { workspace = true }
 bub-codex = { workspace = true }
 bub-discord = { workspace = true }
+bub-schedule = { workspace = true }
