@@ -315,18 +315,19 @@ class AMQPChannel(Channel):
         if self._me is not self._missing:
             return self._me
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/getMe"
+        self._me = None
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 if response.status == 200:
                     data = await response.json()
                     if data.get("ok") and isinstance(data.get("result"), dict):
                         self._me = data["result"]
-                logger.error(
-                    "Failed to get bot info from Telegram status={} response={}",
-                    response.status,
-                    await response.text(),
-                )
-        self._me = None
+                else:
+                    logger.error(
+                        "Failed to get bot info from Telegram status={} response={}",
+                        response.status,
+                        await response.text(),
+                    )
         return self._me
 
     def is_mentioned(self, payload: dict[str, Any]) -> bool:
