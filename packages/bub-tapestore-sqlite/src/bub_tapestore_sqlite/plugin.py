@@ -19,7 +19,7 @@ DEFAULT_BUB_HOME = Path.home() / ".bub"
 
 class SQLiteTapeStoreSettings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_prefix="BUB_TAPESTORE_SQLITE_",
+        env_prefix="BUB_SQLITE_",
         env_file=".env",
         extra="ignore",
     )
@@ -32,6 +32,7 @@ class SQLiteTapeStoreSettings(BaseSettings):
     busy_timeout_ms: int = Field(default=5000, ge=0)
     journal_mode: str = "WAL"
     synchronous: str = "NORMAL"
+    embedding_model: str | None = None
 
     @field_validator("bub_home", mode="after")
     @classmethod
@@ -66,6 +67,7 @@ def _build_store(
         busy_timeout_ms=settings.busy_timeout_ms,
         journal_mode=settings.journal_mode,
         synchronous=settings.synchronous,
+        embedding_model=settings.embedding_model,
     )
 
 
