@@ -537,7 +537,7 @@ class FeishuChannel(Channel):
             )
             return None
 
-        sender_name = getattr(response.data.user, "nickname", None)
+        sender_name = getattr(response.data.user, "name", None)
         if not sender_name:
             return None
         return str(sender_name)
